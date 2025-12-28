@@ -4,10 +4,10 @@ from recipe_scrapers import scrape_html
 from db.postgres import fetch_next_url, mark_done, mark_failed
 from db.mongo import save_recipe
 
-from cookit_scraper.db.postgres import fetch_next_url, mark_done, mark_failed
-from cookit_scraper.db.mongo import save_recipe
-from cookit_scraper.utils.delay import polite_sleep
-from cookit_scraper.utils.mailer import send_email
+from db.postgres import fetch_next_url, mark_done, mark_failed
+from db.mongo import save_recipe
+from utils.delay import polite_sleep
+from utils.mailer import send_email
 
 def fetch_recipe_data(url):
     headers = {

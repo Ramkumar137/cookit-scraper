@@ -3,8 +3,8 @@ from pydantic import BaseModel
 import cloudscraper
 import xml.etree.ElementTree as ET
 
-from cookit_scraper.db.postgres import insert_urls
-from cookit_scraper.utils.mailer import send_email
+from db.postgres import insert_urls
+from utils.mailer import send_email
 
 
 app = FastAPI(title="Cookit Ingestion API")
