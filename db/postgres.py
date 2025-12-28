@@ -9,6 +9,27 @@ conn = psycopg2.connect(DATABASE_URL)
 conn.autocommit = True
 
 
+def init_db():
+    """
+    Safe to call multiple times.
+    Creates required tables only if they don't exist.
+    """
+    with conn.cursor() as cur:
+        cur.execute("""
+        CREATE TABLE IF NOT EXISTS url_queue (
+            id SERIAL PRIMARY KEY,
+            source TEXT,
+            url TEXT UNIQUE,
+            status TEXT DEFAULT 'pending',
+            retries INT DEFAULT 0,
+            created_at TIMESTAMP DEFAULT NOW()
+        );
+        """)
+
+
+init_db()
+
+
 def insert_urls(urls, source="sitemap"):
     with conn.cursor() as cur:
         for url in urls:
